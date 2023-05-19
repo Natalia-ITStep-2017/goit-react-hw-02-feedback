@@ -1,6 +1,6 @@
 import { Component } from 'react';
 import Statistics from './statistics/statistics';
-import FeedbackOptions from './buttons/buttons';
+import FeedbackOptions from './buttons/button';
 import Section from './section/section';
 import Notification from './notification/notification';
 
@@ -12,20 +12,17 @@ class Feedback extends Component {
     bad: 0
   }
 
-  handleAddFedbackGood = () => {
-    this.setState((prevState) => ({ good: prevState.good + 1 }));
-    this.goodFeedbackPercent();
+handleAddFeedback = (option) => {
+  const stateOption = option.toLowerCase();
+  this.setState((prevState) => ({
+    [stateOption]: prevState[stateOption] + 1
+  })
+  );
   }
 
-  handleAddFedbackNeutral = () => {
-    this.setState(prevState => ({ neutral: prevState.neutral + 1 }))
-  }
-
-  handleAddFedbackBad = () => {
-    this.setState(prevState => ({ bad: prevState.bad + 1 }))
-  }
-
-  countTotalFeedback = () => (this.state.good + this.state.neutral + this.state.bad)
+  countTotalFeedback = () => (
+    this.state.good + this.state.neutral + this.state.bad
+  )
 
 
   goodFeedbackPercent = () => {
@@ -35,24 +32,16 @@ class Feedback extends Component {
 
   render() {
     const { good, neutral, bad } = this.state;
-    const { handleAddFedbackGood,
-      handleAddFedbackNeutral,
-      handleAddFedbackBad,
+    const { handleAddFeedback,
       countTotalFeedback,
       goodFeedbackPercent } = this;
 
     return (
       <div>
         <Section title="Please leave feedback">
-          <FeedbackOptions
-            options="Good"
-            onLeaveFeedback={handleAddFedbackGood} />
-          <FeedbackOptions
-            options="Neutral"
-            onLeaveFeedback={handleAddFedbackNeutral} />
-          <FeedbackOptions
-            options="Bad"
-              onLeaveFeedback={handleAddFedbackBad} />
+        <FeedbackOptions
+            options={["Good", "Neutral", "Bad"]}
+            onLeaveFeedback={handleAddFeedback} />
         </Section>
         {!countTotalFeedback() ? (
           <Notification message="There is no feedback" />
