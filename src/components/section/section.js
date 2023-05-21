@@ -14,7 +14,7 @@ Section.propTypes = {
   children: PropTypes.oneOfType([
     PropTypes.element,
     PropTypes.arrayOf(PropTypes.element),
-  ]),
+  ]).isRequired,
 };
 
 export default Section
