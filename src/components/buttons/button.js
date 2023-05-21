@@ -10,7 +10,7 @@ const FeedbackOptions = ({ options, onLeaveFeedback }) => {
           key={nanoid()}
           onClick={() => onLeaveFeedback(option)}
           className={css.button} >
-          {option}
+          {option[0].toUpperCase() + option.slice(1)}
         </button >
         )
       })

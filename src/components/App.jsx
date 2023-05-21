@@ -40,7 +40,7 @@ handleAddFeedback = (option) => {
       <div>
         <Section title="Please leave feedback">
         <FeedbackOptions
-            options={["Good", "Neutral", "Bad"]}
+            options = {Object.keys(this.state)}
             onLeaveFeedback={handleAddFeedback} />
         </Section>
         {!countTotalFeedback() ? (
